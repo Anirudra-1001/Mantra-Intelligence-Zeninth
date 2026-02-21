@@ -6,50 +6,20 @@
 <title>Pause & Parampara</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-body{
-  font-family:'Poppins',sans-serif;
-  background:#f4f1ea;
-  color:#2d2d2d;
-  margin:0; padding:0;
-  text-align:center;
-}
-header{
-  padding:20px;
-}
-h1{font-size:24px; margin-bottom:5px;}
-.tagline{font-size:14px; color:#555; margin-bottom:20px;}
-.section{
-  background:white;
-  margin:20px; padding:20px;
-  border-radius:15px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
-}
-button{
-  margin:10px; padding:10px 20px;
-  border:none; border-radius:20px;
-  background:#6b705c; color:white;
-  cursor:pointer;
-}
-textarea{
-  width:90%; margin-top:10px; padding:10px;
-  border-radius:10px; border:1px solid #ccc;
-  resize:none;
-}
-.tabs{
-  display:flex; justify-content:center; flex-wrap:wrap;
-  margin-top:10px;
-}
-.tab-btn{
-  margin:5px; padding:8px 16px;
-  border:none; border-radius:15px;
-  background:#a5a58d; color:white;
-  cursor:pointer;
-}
+body{font-family:'Poppins',sans-serif;background:#f4f1ea;color:#2d2d2d;margin:0;padding:0;text-align:center;}
+header{padding:20px;}
+h1{font-size:26px;margin-bottom:5px;}
+.tagline{font-size:14px;color:#555;margin-bottom:20px;}
+.section{background:white;margin:20px;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+button{margin:5px;padding:10px 20px;border:none;border-radius:20px;background:#6b705c;color:white;cursor:pointer;}
+textarea{width:90%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ccc;resize:none;}
+.tabs{display:flex;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+.tab-btn{margin:5px;padding:8px 16px;border:none;border-radius:15px;background:#a5a58d;color:white;cursor:pointer;}
 .active-tab{background:#6b705c;}
-#contentArea{margin-top:20px; text-align:left;}
+#contentArea{margin-top:20px;text-align:left;}
+#sadSection{margin-top:20px;}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -59,13 +29,12 @@ textarea{
 
 <div class="section">
 <h2>Welcome</h2>
-<p>This website guides you to learn mantras and teachings from multiple cultures in a peaceful, distraction-free way.</p>
-<p><strong>Steps:</strong></p>
-<ul style="text-align:left; margin-top:10px;">
-<li>1. Sit comfortably.</li>
-<li>2. Click a tab below to explore a culture.</li>
-<li>3. Read slowly.</li>
-<li>4. Pause and reflect after each mantra.</li>
+<p>This website helps you learn mantras and teachings from multiple religions in a peaceful, guided way.</p>
+<ul style="text-align:left;margin-top:10px;">
+<li>1. Choose a culture tab below.</li>
+<li>2. Read mantras / teachings slowly.</li>
+<li>3. Pause and reflect after each mantra.</li>
+<li>4. If you feel sad, click the "I am sad" button to receive uplifting mantras from all religions.</li>
 </ul>
 </div>
 
@@ -83,39 +52,74 @@ textarea{
 </div>
 </div>
 
+<div class="section" id="sadSection">
+<h2>Feeling sad?</h2>
+<button onclick="generateSad()">I am sad</button>
+<div id="sadContent"></div>
+</div>
+
 <script>
+// 100+ mantras / teachings (shortened example, can expand)
 const mantras = {
-  hindu:[
-    {text:"Bhagavad Gita – Do your duty without attachment.", reflection:"Pause: How can you act without expecting reward today?"},
-    {text:"Ramayana – Live with integrity and honor.", reflection:"Pause: Which action today reflects integrity?"},
-    {text:"Upanishads – Know yourself to understand the universe.", reflection:"Pause: Take a moment to observe your thoughts."}
-  ],
-  sikh:[
-    {text:"Guru Granth Sahib – Treat all humans as one.", reflection:"Pause: How can you serve others today?"}
-  ],
-  islam:[
-    {text:"Qur'an – Practice patience and faith.", reflection:"Pause: Where can you show patience today?"}
-  ],
-  christian:[
-    {text:"Bible – Love and forgive others.", reflection:"Pause: Who can you forgive or help today?"}
-  ],
-  buddhism:[
-    {text:"Dhammapada – Practice mindfulness and inner peace.", reflection:"Pause: Observe your breath for 1 minute."}
-  ]
+hindu:[
+{ text:"Bhagavad Gita – Do your duty without attachment.", reflection:"Pause: How can you act without expecting reward today?" },
+{ text:"Ramayana – Live with integrity and honor.", reflection:"Pause: Which action today reflects integrity?" },
+{ text:"Upanishads – Know yourself to understand the universe.", reflection:"Pause: Observe your thoughts for a minute." },
+{ text:"Shiva mantra – Om Namah Shivaya.", reflection:"Pause: Take a deep breath and feel peace." },
+{ text:"Hanuman mantra – Om Hanumate Namah.", reflection:"Pause: Remember courage and devotion." }
+// ... add up to 30 Hindu
+],
+sikh:[
+{ text:"Guru Granth Sahib – Treat all humans as one.", reflection:"Pause: How can you serve others today?" },
+{ text:"Ik Onkar – There is one God.", reflection:"Pause: Reflect on unity and equality." }
+// ... up to 10 Sikh
+],
+islam:[
+{ text:"Qur'an – Practice patience and faith.", reflection:"Pause: Where can you show patience today?" },
+{ text:"Qur'an – Charity purifies the soul.", reflection:"Pause: How can you help someone today?" }
+// ... up to 10 Islam
+],
+christian:[
+{ text:"Bible – Love and forgive others.", reflection:"Pause: Who can you forgive or help today?" },
+{ text:"Bible – Do unto others as you would have them do unto you.", reflection:"Pause: Reflect on kindness." }
+// ... up to 10 Christian
+],
+buddhism:[
+{ text:"Dhammapada – Practice mindfulness and inner peace.", reflection:"Pause: Observe your breath for 1 minute." },
+{ text:"Buddha – Let go of anger and embrace compassion.", reflection:"Pause: Who can you forgive today?" }
+// ... up to 10 Buddhism
+]
 };
 
+// Show tab content
 function showTab(tab){
-  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active-tab'));
-  event.target.classList.add('active-tab');
-  const data = mantras[tab];
-  let html="";
-  data.forEach((m,i)=>{
-    html+=`<p><strong>${i+1}. ${m.text}</strong></p>`;
-    html+=`<p><em>${m.reflection}</em></p><hr>`;
-  });
-  document.getElementById("contentArea").innerHTML=html;
+document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active-tab'));
+event.target.classList.add('active-tab');
+const data = mantras[tab];
+let html="";
+data.forEach((m,i)=>{
+html+=`<p><strong>${i+1}. ${m.text}</strong></p>`;
+html+=`<p><em>${m.reflection}</em></p><hr>`;
+});
+document.getElementById("contentArea").innerHTML=html;
 }
-</script>
 
+// Generate random mantras from all religions
+function generateSad(){
+const allMantras = [...mantras.hindu,...mantras.sikh,...mantras.islam,...mantras.christian,...mantras.buddhism];
+let selected = [];
+for(let i=0;i<5;i++){ // show 5 random
+let rand = allMantras[Math.floor(Math.random()*allMantras.length)];
+selected.push(rand);
+}
+let html="";
+selected.forEach((m,i)=>{
+html+=`<p><strong>${i+1}. ${m.text}</strong></p>`;
+html+=`<p><em>${m.reflection}</em></p><hr>`;
+});
+document.getElementById("sadContent").innerHTML=html;
+}
+
+</script>
 </body>
 </html>
