@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pause & Parampara</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+body{
+  font-family:'Poppins',sans-serif;
+  background:#f4f1ea;
+  color:#2d2d2d;
+  margin:0; padding:0;
+  text-align:center;
+}
+header{
+  padding:20px;
+}
+h1{font-size:24px; margin-bottom:5px;}
+.tagline{font-size:14px; color:#555; margin-bottom:20px;}
+.section{
+  background:white;
+  margin:20px; padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+}
+button{
+  margin:10px; padding:10px 20px;
+  border:none; border-radius:20px;
+  background:#6b705c; color:white;
+  cursor:pointer;
+}
+textarea{
+  width:90%; margin-top:10px; padding:10px;
+  border-radius:10px; border:1px solid #ccc;
+  resize:none;
+}
+.tabs{
+  display:flex; justify-content:center; flex-wrap:wrap;
+  margin-top:10px;
+}
+.tab-btn{
+  margin:5px; padding:8px 16px;
+  border:none; border-radius:15px;
+  background:#a5a58d; color:white;
+  cursor:pointer;
+}
+.active-tab{background:#6b705c;}
+#contentArea{margin-top:20px; text-align:left;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Pause & Parampara</h1>
+<p class="tagline">Step away from distractions. Learn and reflect.</p>
+</header>
+
+<div class="section">
+<h2>Welcome</h2>
+<p>This website guides you to learn mantras and teachings from multiple cultures in a peaceful, distraction-free way.</p>
+<p><strong>Steps:</strong></p>
+<ul style="text-align:left; margin-top:10px;">
+<li>1. Sit comfortably.</li>
+<li>2. Click a tab below to explore a culture.</li>
+<li>3. Read slowly.</li>
+<li>4. Pause and reflect after each mantra.</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Select Culture / Religion</h2>
+<div class="tabs">
+<button class="tab-btn active-tab" onclick="showTab('hindu')">Hindu</button>
+<button class="tab-btn" onclick="showTab('sikh')">Sikh</button>
+<button class="tab-btn" onclick="showTab('islam')">Islam</button>
+<button class="tab-btn" onclick="showTab('christian')">Christian</button>
+<button class="tab-btn" onclick="showTab('buddhism')">Buddhism</button>
+</div>
+<div id="contentArea">
+<p>Select a tab above to start learning.</p>
+</div>
+</div>
+
+<script>
+const mantras = {
+  hindu:[
+    {text:"Bhagavad Gita – Do your duty without attachment.", reflection:"Pause: How can you act without expecting reward today?"},
+    {text:"Ramayana – Live with integrity and honor.", reflection:"Pause: Which action today reflects integrity?"},
+    {text:"Upanishads – Know yourself to understand the universe.", reflection:"Pause: Take a moment to observe your thoughts."}
+  ],
+  sikh:[
+    {text:"Guru Granth Sahib – Treat all humans as one.", reflection:"Pause: How can you serve others today?"}
+  ],
+  islam:[
+    {text:"Qur'an – Practice patience and faith.", reflection:"Pause: Where can you show patience today?"}
+  ],
+  christian:[
+    {text:"Bible – Love and forgive others.", reflection:"Pause: Who can you forgive or help today?"}
+  ],
+  buddhism:[
+    {text:"Dhammapada – Practice mindfulness and inner peace.", reflection:"Pause: Observe your breath for 1 minute."}
+  ]
+};
+
+function showTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active-tab'));
+  event.target.classList.add('active-tab');
+  const data = mantras[tab];
+  let html="";
+  data.forEach((m,i)=>{
+    html+=`<p><strong>${i+1}. ${m.text}</strong></p>`;
+    html+=`<p><em>${m.reflection}</em></p><hr>`;
+  });
+  document.getElementById("contentArea").innerHTML=html;
+}
+</script>
+
+</body>
+</html>
