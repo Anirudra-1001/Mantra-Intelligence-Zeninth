@@ -6,12 +6,88 @@
 <title>MIZ – Cultural Intelligence Engine</title>
 
 <style>
+/* ===== GENERAL STYLES ===== */
 body{
     margin:0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg,#1d2671,#c33764);
     color:white;
 }
+
+/* ===== PAGE SECTIONS ===== */
+.page{
+  width:100%;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  transition: opacity 0.8s ease;
+}
+
+/* ===== HOME PAGE ===== */
+.homeContent{
+    max-width:800px;
+    background: rgba(255,255,255,0.05);
+    padding: 40px 60px;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.homeContent:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.homeContent h1{
+  font-size:48px;
+  margin-bottom:10px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.homeContent p{
+  font-size:18px;
+  margin:10px 0 25px 0;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.homeContent .description{
+  font-size:16px;
+  line-height:1.6;
+  margin-bottom:25px;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+.homeContent button{
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:15px;
+  background: linear-gradient(135deg,#ff9800,#ffc107);
+  color:white;
+  cursor:pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.homeContent button:hover{
+    background: linear-gradient(135deg,#e65100,#ffb74d);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+@keyframes fadeInDown {
+  0% {opacity:0; transform: translateY(-50px);}
+  100% {opacity:1; transform: translateY(0);}
+}
+
+@keyframes fadeInUp {
+  0% {opacity:0; transform: translateY(50px);}
+  100% {opacity:1; transform: translateY(0);}
+}
+
+/* ===== APP PAGE ===== */
 header{
     padding:20px;
     text-align:center;
@@ -23,10 +99,16 @@ header{
     width:90%;
     max-width:900px;
     margin:30px auto;
-    background:rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
     padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 25px rgba(0,0,0,0.5);
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.container:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 select, textarea, button{
     width:100%;
@@ -41,14 +123,18 @@ select, textarea{
     color:black;
 }
 button{
-    background:#ff9800;
+    background: linear-gradient(135deg,#ff9800,#ffc107);
     color:white;
     font-weight:bold;
     cursor:pointer;
-    transition:0.3s;
+    border-radius:15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 button:hover{
-    background:#e65100;
+    background: linear-gradient(135deg,#e65100,#ffb74d);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 #result{
     margin-top:20px;
@@ -59,45 +145,72 @@ button:hover{
 }
 .tag{
     display:inline-block;
-    background:#4caf50;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:12px;
+    background: rgba(76,175,80,0.7);
+    color:white;
+    padding:6px 12px;
+    border-radius:30px;
+    font-size:13px;
     margin-bottom:10px;
+    transition: all 0.3s ease;
+}
+.tag:hover{
+    transform: scale(1.1);
+    box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+.tag.positive{
+    background: rgba(255,64,129,0.7);
 }
 </style>
 </head>
 <body>
 
-<header>MIZ – Smart Cultural Wisdom Platform</header>
+<!-- ===== HOME PAGE ===== -->
+<div id="homePage" class="page">
+  <div class="homeContent">
+    <h1>Welcome to MIZ</h1>
+    <p>Your Smart Cultural Wisdom & Guidance Platform</p>
+    <div class="description">
+      <p>MIZ combines ancient knowledge from Bhagavad Gita, Quran, Bible, and Mahabharat with modern technology to provide smart, personalized guidance. Share your concerns, and MIZ will provide insightful advice, motivational quotes, and real-life applications to help you make better decisions and stay positive.</p>
+      <p>Whether it’s stress, fear, anger, or confusion, MIZ is here to guide you in a thoughtful and supportive way. Begin your journey of self-awareness and positive growth now!</p>
+    </div>
+    <button onclick="goToApp()">Enter</button>
+  </div>
+</div>
 
-<div class="container">
-
-<h2>Describe Your Problem</h2>
-
-<select id="book">
-<option value="gita">Bhagavad Gita</option>
-<option value="quran">Quran</option>
-<option value="bible">Bible</option>
-<option value="mahabharat">Mahabharat</option>
-</select>
-
-<textarea id="problem" rows="4" placeholder="Example: I feel anxiety about exams and future..."></textarea>
-
-<button onclick="generateSolution()">Get Smart Guidance</button>
-
-<div id="result"></div>
-
+<!-- ===== APP PAGE ===== -->
+<div id="appPage" class="page" style="display:none;">
+  <header>MIZ – Smart Cultural Wisdom Platform</header>
+  <div class="container">
+    <h2>Describe Your Problem</h2>
+    <select id="book">
+      <option value="gita">Bhagavad Gita</option>
+      <option value="quran">Quran</option>
+      <option value="bible">Bible</option>
+    </select>
+    <textarea id="problem" rows="4" placeholder="Example: I feel anxiety about exams and future..."></textarea>
+    <button onclick="generateSolution()">Get Smart Guidance</button>
+    <div id="result"></div>
+  </div>
 </div>
 
 <script>
+// ===== PAGE SWITCH =====
+function goToApp(){
+  document.getElementById("homePage").style.display = "none";
+  document.getElementById("appPage").style.display = "block";
+}
 
-// ==========================
-// LARGE SCALABLE DATABASE
-// ==========================
+// ===== POSITIVE VIBES =====
+const positiveVibes = [
+    "Believe in yourself—every challenge is an opportunity!",
+    "Keep smiling; positivity attracts positivity.",
+    "Your small efforts today create big results tomorrow.",
+    "Gratitude turns what we have into enough.",
+    "You are capable of more than you think!"
+];
 
+// ===== WISDOM DATABASE =====
 const wisdomDatabase = {
-
 gita: [
 {keywords:["stress","exam","career","future"],quote:"You have the right to perform your duty, but not to the fruits of your actions. (2.47)",meaning:"Focus on action not outcome.",application:"Prepare sincerely without result anxiety."},
 {keywords:["anger"],quote:"From anger comes delusion; from delusion, loss of memory.",meaning:"Anger clouds judgment.",application:"Pause before reacting emotionally."},
@@ -107,7 +220,6 @@ gita: [
 {keywords:["discipline"],quote:"Self-control is strength.",meaning:"Control mind and senses.",application:"Avoid distractions."},
 {keywords:["attachment"],quote:"Detach from outcomes.",meaning:"Attachment causes suffering.",application:"Do your best and let go."}
 ],
-
 quran: [
 {keywords:["hardship","pain"],quote:"Indeed, with hardship comes ease. (94:6)",meaning:"Difficulty is temporary.",application:"Stay patient in tough times."},
 {keywords:["fear","anxiety"],quote:"Allah is with those who are patient.",meaning:"Patience brings support.",application:"Trust the process."},
@@ -115,7 +227,6 @@ quran: [
 {keywords:["anger"],quote:"Control anger and forgive.",meaning:"Forgiveness brings peace.",application:"Respond calmly."},
 {keywords:["gratitude"],quote:"If you are grateful, I will increase you.",meaning:"Gratitude multiplies blessings.",application:"Practice daily thankfulness."}
 ],
-
 bible: [
 {keywords:["failure"],quote:"I can do all things through Christ who strengthens me.",meaning:"Faith gives strength.",application:"Retry with confidence."},
 {keywords:["worry","stress"],quote:"Cast all your anxiety on Him.",meaning:"Release your worries.",application:"Pray instead of overthinking."},
@@ -123,7 +234,6 @@ bible: [
 {keywords:["forgiveness"],quote:"Forgive, and you will be forgiven.",meaning:"Let go of grudges.",application:"Choose peace."},
 {keywords:["hope"],quote:"Faith can move mountains.",meaning:"Believe strongly.",application:"Never lose hope."}
 ],
-
 mahabharat: [
 {keywords:["jealousy","comparison"],quote:"Jealousy destroys wisdom.",meaning:"Comparison causes suffering.",application:"Focus on self-growth."},
 {keywords:["anger"],quote:"Anger leads to destruction.",meaning:"Control emotions.",application:"Think before reacting."},
@@ -131,52 +241,54 @@ mahabharat: [
 {keywords:["duty"],quote:"Follow your dharma.",meaning:"Responsibility defines character.",application:"Do what is right."},
 {keywords:["loyalty"],quote:"True loyalty builds strength.",meaning:"Value relationships.",application:"Stay committed."}
 ]
-
 };
 
-// ==========================
-// SMART MATCH ENGINE
-// ==========================
-
+// ===== SMART MATCH ENGINE =====
 function generateSolution(){
-const book = document.getElementById("book").value;
-const text = document.getElementById("problem").value.toLowerCase();
-const resultDiv = document.getElementById("result");
+  const book = document.getElementById("book").value;
+  const text = document.getElementById("problem").value.toLowerCase();
+  const resultDiv = document.getElementById("result");
 
-let bestMatch=null;
-let maxScore=0;
+  let bestMatch=null;
+  let maxScore=0;
 
-wisdomDatabase[book].forEach(entry=>{
-let score=0;
-entry.keywords.forEach(word=>{
-if(text.includes(word)){
-score+=2;
+  wisdomDatabase[book].forEach(entry=>{
+      let score=0;
+      entry.keywords.forEach(word=>{
+          if(text.includes(word)){
+              score+=2;
+          }
+      });
+      if(score>maxScore){
+          maxScore=score;
+          bestMatch=entry;
+      }
+  });
+
+  if(bestMatch){
+      resultDiv.innerHTML=`
+      <div class="tag">High Confidence Match</div>
+      <h3>Guidance:</h3>
+      <p><b>Quote:</b> ${bestMatch.quote}</p>
+      <p><b>Meaning:</b> ${bestMatch.meaning}</p>
+      <p><b>Real Life Application:</b> ${bestMatch.application}</p>
+      `;
+  } else {
+      resultDiv.innerHTML=`
+      <h3>General Guidance:</h3>
+      <p>Stay patient, act ethically, and trust that clarity will come with time.</p>
+      `;
+  }
+
+  // Add random positive vibe
+  const randomVibe = positiveVibes[Math.floor(Math.random() * positiveVibes.length)];
+  resultDiv.innerHTML += `
+  <div class="tag positive">🌟 Positive Vibe</div>
+  <p>${randomVibe}</p>
+  `;
+
+  resultDiv.style.display="block";
 }
-});
-if(score>maxScore){
-maxScore=score;
-bestMatch=entry;
-}
-});
-
-if(bestMatch){
-resultDiv.innerHTML=`
-<div class="tag">High Confidence Match</div>
-<h3>Guidance:</h3>
-<p><b>Quote:</b> ${bestMatch.quote}</p>
-<p><b>Meaning:</b> ${bestMatch.meaning}</p>
-<p><b>Real Life Application:</b> ${bestMatch.application}</p>
-`;
-}else{
-resultDiv.innerHTML=`
-<h3>General Guidance:</h3>
-<p>Stay patient, act ethically, and trust that clarity will come with time.</p>
-`;
-}
-
-resultDiv.style.display="block";
-}
-
 </script>
 
 </body>
