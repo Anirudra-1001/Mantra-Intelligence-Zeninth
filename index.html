@@ -3,123 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pause & Parampara</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>MIZ – Cultural Intelligence Engine</title>
+
 <style>
-body{font-family:'Poppins',sans-serif;background:#f4f1ea;color:#2d2d2d;margin:0;padding:0;text-align:center;}
-header{padding:20px;}
-h1{font-size:26px;margin-bottom:5px;}
-.tagline{font-size:14px;color:#555;margin-bottom:20px;}
-.section{background:white;margin:20px;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
-button{margin:5px;padding:10px 20px;border:none;border-radius:20px;background:#6b705c;color:white;cursor:pointer;}
-textarea{width:90%;margin-top:10px;padding:10px;border-radius:10px;border:1px solid #ccc;resize:none;}
-.tabs{display:flex;justify-content:center;flex-wrap:wrap;margin-top:10px;}
-.tab-btn{margin:5px;padding:8px 16px;border:none;border-radius:15px;background:#a5a58d;color:white;cursor:pointer;}
-.active-tab{background:#6b705c;}
-#contentArea{margin-top:20px;text-align:left;}
-#sadSection{margin-top:20px;}
+body{
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#1d2671,#c33764);
+    color:white;
+}
+header{
+    padding:20px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    background:rgba(0,0,0,0.4);
+}
+.container{
+    width:90%;
+    max-width:900px;
+    margin:30px auto;
+    background:rgba(255,255,255,0.1);
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 25px rgba(0,0,0,0.5);
+}
+select, textarea, button{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+select, textarea{
+    background:white;
+    color:black;
+}
+button{
+    background:#ff9800;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+button:hover{
+    background:#e65100;
+}
+#result{
+    margin-top:20px;
+    padding:20px;
+    background:rgba(0,0,0,0.6);
+    border-radius:10px;
+    display:none;
+}
+.tag{
+    display:inline-block;
+    background:#4caf50;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:10px;
+}
 </style>
 </head>
 <body>
 
-<header>
-<h1>Pause & Parampara</h1>
-<p class="tagline">Step away from distractions. Learn and reflect.</p>
-</header>
+<header>MIZ – Smart Cultural Wisdom Platform</header>
 
-<div class="section">
-<h2>Welcome</h2>
-<p>This website helps you learn mantras and teachings from multiple religions in a peaceful, guided way.</p>
-<ul style="text-align:left;margin-top:10px;">
-<li>1. Choose a culture tab below.</li>
-<li>2. Read mantras / teachings slowly.</li>
-<li>3. Pause and reflect after each mantra.</li>
-<li>4. If you feel sad, click the "I am sad" button to receive uplifting mantras from all religions.</li>
-</ul>
-</div>
+<div class="container">
 
-<div class="section">
-<h2>Select Culture / Religion</h2>
-<div class="tabs">
-<button class="tab-btn active-tab" onclick="showTab('hindu')">Hindu</button>
-<button class="tab-btn" onclick="showTab('sikh')">Sikh</button>
-<button class="tab-btn" onclick="showTab('islam')">Islam</button>
-<button class="tab-btn" onclick="showTab('christian')">Christian</button>
-<button class="tab-btn" onclick="showTab('buddhism')">Buddhism</button>
-</div>
-<div id="contentArea">
-<p>Select a tab above to start learning.</p>
-</div>
-</div>
+<h2>Describe Your Problem</h2>
 
-<div class="section" id="sadSection">
-<h2>Feeling sad?</h2>
-<button onclick="generateSad()">I am sad</button>
-<div id="sadContent"></div>
+<select id="book">
+<option value="gita">Bhagavad Gita</option>
+<option value="quran">Quran</option>
+<option value="bible">Bible</option>
+<option value="mahabharat">Mahabharat</option>
+</select>
+
+<textarea id="problem" rows="4" placeholder="Example: I feel anxiety about exams and future..."></textarea>
+
+<button onclick="generateSolution()">Get Smart Guidance</button>
+
+<div id="result"></div>
+
 </div>
 
 <script>
-// 100+ mantras / teachings (shortened example, can expand)
-const mantras = {
-hindu:[
-{ text:"Bhagavad Gita – Do your duty without attachment.", reflection:"Pause: How can you act without expecting reward today?" },
-{ text:"Ramayana – Live with integrity and honor.", reflection:"Pause: Which action today reflects integrity?" },
-{ text:"Upanishads – Know yourself to understand the universe.", reflection:"Pause: Observe your thoughts for a minute." },
-{ text:"Shiva mantra – Om Namah Shivaya.", reflection:"Pause: Take a deep breath and feel peace." },
-{ text:"Hanuman mantra – Om Hanumate Namah.", reflection:"Pause: Remember courage and devotion." }
-// ... add up to 30 Hindu
+
+// ==========================
+// LARGE SCALABLE DATABASE
+// ==========================
+
+const wisdomDatabase = {
+
+gita: [
+{keywords:["stress","exam","career","future"],quote:"You have the right to perform your duty, but not to the fruits of your actions. (2.47)",meaning:"Focus on action not outcome.",application:"Prepare sincerely without result anxiety."},
+{keywords:["anger"],quote:"From anger comes delusion; from delusion, loss of memory.",meaning:"Anger clouds judgment.",application:"Pause before reacting emotionally."},
+{keywords:["confusion","decision"],quote:"Surrender unto Me alone.",meaning:"Trust divine wisdom.",application:"Take decisions with calm faith."},
+{keywords:["fear"],quote:"Be fearless in righteousness.",meaning:"Courage comes from dharma.",application:"Stand for what is right."},
+{keywords:["failure"],quote:"A person is made by his belief.",meaning:"Your thoughts shape you.",application:"Maintain positive belief."},
+{keywords:["discipline"],quote:"Self-control is strength.",meaning:"Control mind and senses.",application:"Avoid distractions."},
+{keywords:["attachment"],quote:"Detach from outcomes.",meaning:"Attachment causes suffering.",application:"Do your best and let go."}
 ],
-sikh:[
-{ text:"Guru Granth Sahib – Treat all humans as one.", reflection:"Pause: How can you serve others today?" },
-{ text:"Ik Onkar – There is one God.", reflection:"Pause: Reflect on unity and equality." }
-// ... up to 10 Sikh
+
+quran: [
+{keywords:["hardship","pain"],quote:"Indeed, with hardship comes ease. (94:6)",meaning:"Difficulty is temporary.",application:"Stay patient in tough times."},
+{keywords:["fear","anxiety"],quote:"Allah is with those who are patient.",meaning:"Patience brings support.",application:"Trust the process."},
+{keywords:["guidance"],quote:"Allah guides whom He wills.",meaning:"Seek guidance sincerely.",application:"Pray for clarity."},
+{keywords:["anger"],quote:"Control anger and forgive.",meaning:"Forgiveness brings peace.",application:"Respond calmly."},
+{keywords:["gratitude"],quote:"If you are grateful, I will increase you.",meaning:"Gratitude multiplies blessings.",application:"Practice daily thankfulness."}
 ],
-islam:[
-{ text:"Qur'an – Practice patience and faith.", reflection:"Pause: Where can you show patience today?" },
-{ text:"Qur'an – Charity purifies the soul.", reflection:"Pause: How can you help someone today?" }
-// ... up to 10 Islam
+
+bible: [
+{keywords:["failure"],quote:"I can do all things through Christ who strengthens me.",meaning:"Faith gives strength.",application:"Retry with confidence."},
+{keywords:["worry","stress"],quote:"Cast all your anxiety on Him.",meaning:"Release your worries.",application:"Pray instead of overthinking."},
+{keywords:["love"],quote:"Love your neighbor as yourself.",meaning:"Kindness matters.",application:"Treat others respectfully."},
+{keywords:["forgiveness"],quote:"Forgive, and you will be forgiven.",meaning:"Let go of grudges.",application:"Choose peace."},
+{keywords:["hope"],quote:"Faith can move mountains.",meaning:"Believe strongly.",application:"Never lose hope."}
 ],
-christian:[
-{ text:"Bible – Love and forgive others.", reflection:"Pause: Who can you forgive or help today?" },
-{ text:"Bible – Do unto others as you would have them do unto you.", reflection:"Pause: Reflect on kindness." }
-// ... up to 10 Christian
-],
-buddhism:[
-{ text:"Dhammapada – Practice mindfulness and inner peace.", reflection:"Pause: Observe your breath for 1 minute." },
-{ text:"Buddha – Let go of anger and embrace compassion.", reflection:"Pause: Who can you forgive today?" }
-// ... up to 10 Buddhism
+
+mahabharat: [
+{keywords:["jealousy","comparison"],quote:"Jealousy destroys wisdom.",meaning:"Comparison causes suffering.",application:"Focus on self-growth."},
+{keywords:["anger"],quote:"Anger leads to destruction.",meaning:"Control emotions.",application:"Think before reacting."},
+{keywords:["ego"],quote:"Ego blinds the wise.",meaning:"Stay humble.",application:"Avoid arrogance."},
+{keywords:["duty"],quote:"Follow your dharma.",meaning:"Responsibility defines character.",application:"Do what is right."},
+{keywords:["loyalty"],quote:"True loyalty builds strength.",meaning:"Value relationships.",application:"Stay committed."}
 ]
+
 };
 
-// Show tab content
-function showTab(tab){
-document.querySelectorAll('.tab-btn').forEach(btn=>btn.classList.remove('active-tab'));
-event.target.classList.add('active-tab');
-const data = mantras[tab];
-let html="";
-data.forEach((m,i)=>{
-html+=`<p><strong>${i+1}. ${m.text}</strong></p>`;
-html+=`<p><em>${m.reflection}</em></p><hr>`;
+// ==========================
+// SMART MATCH ENGINE
+// ==========================
+
+function generateSolution(){
+const book = document.getElementById("book").value;
+const text = document.getElementById("problem").value.toLowerCase();
+const resultDiv = document.getElementById("result");
+
+let bestMatch=null;
+let maxScore=0;
+
+wisdomDatabase[book].forEach(entry=>{
+let score=0;
+entry.keywords.forEach(word=>{
+if(text.includes(word)){
+score+=2;
+}
 });
-document.getElementById("contentArea").innerHTML=html;
+if(score>maxScore){
+maxScore=score;
+bestMatch=entry;
+}
+});
+
+if(bestMatch){
+resultDiv.innerHTML=`
+<div class="tag">High Confidence Match</div>
+<h3>Guidance:</h3>
+<p><b>Quote:</b> ${bestMatch.quote}</p>
+<p><b>Meaning:</b> ${bestMatch.meaning}</p>
+<p><b>Real Life Application:</b> ${bestMatch.application}</p>
+`;
+}else{
+resultDiv.innerHTML=`
+<h3>General Guidance:</h3>
+<p>Stay patient, act ethically, and trust that clarity will come with time.</p>
+`;
 }
 
-// Generate random mantras from all religions
-function generateSad(){
-const allMantras = [...mantras.hindu,...mantras.sikh,...mantras.islam,...mantras.christian,...mantras.buddhism];
-let selected = [];
-for(let i=0;i<5;i++){ // show 5 random
-let rand = allMantras[Math.floor(Math.random()*allMantras.length)];
-selected.push(rand);
-}
-let html="";
-selected.forEach((m,i)=>{
-html+=`<p><strong>${i+1}. ${m.text}</strong></p>`;
-html+=`<p><em>${m.reflection}</em></p><hr>`;
-});
-document.getElementById("sadContent").innerHTML=html;
+resultDiv.style.display="block";
 }
 
 </script>
+
 </body>
 </html>
